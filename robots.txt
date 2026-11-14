@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://widukindtech.com/sitemap.xml

@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/site.css?v=3">
+  <link rel="stylesheet" href="assets/site.css?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -57,14 +57,24 @@
   <!-- Hero -->
   <section class="hero">
     <div class="wrap">
-      <div class="status"><span class="dot" aria-hidden="true"></span> Taking new contract work</div>
-      <h1>Native iOS &amp; Mac apps, <em>built and shipped.</em></h1>
-      <p class="lede">I'm Coby, a Swift and SwiftUI engineer in Southern Utah. For three years I've been the lead iOS engineer on the Utah State Parks app. I take projects from the first conversation to an App Store release, and I can also join an existing codebase and start shipping features.</p>
-      <div class="ctas">
-        <a class="btn btn-primary" href="#contact">Start a project
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="status"><span class="dot" aria-hidden="true"></span> Taking new contract work</div>
+          <h1>Native iOS &amp; Mac apps, <em>built and shipped.</em></h1>
+          <p class="lede">I'm Coby, a Swift and SwiftUI engineer in Southern Utah. For three years I've been the lead iOS engineer on the Utah State Parks app. I take projects from the first conversation to an App Store release, and I can also join an existing codebase and start shipping features.</p>
+          <div class="ctas">
+            <a class="btn btn-primary" href="#contact">Start a project
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#work">See my work</a>
+          </div>
+        </div>
+        <a class="hero-shot" href="beer.html">
+          <img src="assets/beer-library.jpg" srcset="assets/beer-library-1000.jpg 1000w, assets/beer-library.jpg 1600w" sizes="(min-width: 1000px) 640px, 100vw" alt="BEER 0.9.0, a Mac app I built, showing a Steam library of 405 games as a grid of cover art with Installed badges" width="1600" height="1006" fetchpriority="high">
+          <span class="hero-caption">BEER, my open-source Mac app
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
         </a>
-        <a class="btn btn-ghost" href="#work">See my work</a>
       </div>
 
       <div class="stats" role="list">

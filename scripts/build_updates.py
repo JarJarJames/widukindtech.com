@@ -148,8 +148,52 @@ def render_feed(posts):
 """
 
 
+TAGS = re.compile(r"<[^>]+>")
+LATEST = re.compile(r"(<!-- LATEST_UPDATES -->).*?(<!-- /LATEST_UPDATES -->)", re.S)
+LATEST_COUNT = 3
+
+
+def excerpt(body_html, limit=220):
+    """First paragraph of a post as plain text, cut at a word boundary."""
+    m = PARA.search(body_html)
+    text = html.unescape(TAGS.sub(" ", m.group(2) if m else body_html))
+    text = re.sub(r"\s+", " ", text.split("•")[0]).strip()
+    if len(text) > limit:
+        text = text[:limit].rsplit(" ", 1)[0].rstrip(",.;:") + "…"
+    return text
+
+
+def render_cards(posts):
+    """Cards for the newest announcements, shown on the BEER page."""
+    if not posts:
+        return '<p class="empty">No announcements yet.</p>'
+    cards = []
+    for i, p in enumerate(posts[:LATEST_COUNT]):
+        d = parse_date(p["createdAt"])
+        latest = i == 0
+        cards.append(f"""        <a class="update-card{' latest' if latest else ''}" href="{PAGE}#post-{p['number']}">
+          <span class="card-top"><time datetime="{p['createdAt']}">{d.strftime('%B %-d, %Y')}</time>{'<span class="badge">Latest</span>' if latest else ''}</span>
+          <h3>{html.escape(p['title'])}</h3>
+          <p>{html.escape(excerpt(p['bodyHTML']))}</p>
+          <span class="more">Read the announcement
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>""")
+    return "\n".join(cards)
+
+
+def fill_beer_page(posts):
+    page = ROOT / "beer.html"
+    s = page.read_text()
+    if not LATEST.search(s):
+        sys.exit("beer.html is missing the LATEST_UPDATES markers")
+    s = LATEST.sub(lambda m: f"{m.group(1)}\n{render_cards(posts)}\n{m.group(2)}", s, count=1)
+    page.write_text(s)
+
+
 def main():
     posts = fetch()
+    fill_beer_page(posts)
     body = "\n".join(render_post(p) for p in posts) if posts else \
         '<p class="empty">No announcements yet.</p>'
     page = (TEMPLATE.read_text()

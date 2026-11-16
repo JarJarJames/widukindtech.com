@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/site.css?v=6">
+  <link rel="stylesheet" href="assets/site.css?v=7">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -74,7 +74,7 @@
           View source
         </a>
       </div>
-      <p class="meta">v0.9.0 · Free &amp; open source (MIT) · Apple Silicon (M1 or later) · macOS 14+ · <a href="beer-updates.html">What's new</a></p>
+      <p class="meta">v0.9.0 · Free &amp; open source (MIT) · Apple Silicon (M1 or later) · macOS 14+ · <a href="#updates">What's new</a></p>
 
       <figure class="shot">
         <img src="assets/beer-library.jpg?v=2" srcset="assets/beer-library-1000.jpg?v=2 1000w, assets/beer-library.jpg?v=2 1600w" sizes="(min-width: 1088px) 1040px, 100vw" alt="BEER 0.9.0 library: a grid of Steam cover art for a 405-game library, with green Installed badges on the ten installed games" width="1600" height="1006" fetchpriority="high">
@@ -296,6 +296,54 @@
           <span class="tag"><b>0.5.0</b> Oct 7</span>
         </div>
         <p style="margin-top:14px;font-size:15px"><a href="beer-updates.html">Release announcements</a> · <a href="https://github.com/JarJarJames/BEER/blob/dev/CHANGELOG.md">Full changelog</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Updates (filled from GitHub Discussions by scripts/build_updates.py) -->
+  <section id="updates">
+    <div class="wrap">
+      <div class="section-head updates-head">
+        <div>
+          <span class="eyebrow">Updates</span>
+          <h2>What's new in BEER</h2>
+          <p>Release announcements from the project's GitHub Discussions.</p>
+        </div>
+        <div class="updates-links">
+          <a class="btn btn-ghost" href="beer-updates.html">All updates</a>
+          <a class="btn btn-ghost" href="beer-updates.xml" aria-label="Subscribe via RSS">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+            RSS
+          </a>
+        </div>
+      </div>
+      <div class="update-cards">
+<!-- LATEST_UPDATES -->
+        <a class="update-card latest" href="beer-updates.html#post-71">
+          <span class="card-top"><time datetime="2026-11-05T18:29:53Z">November 5, 2026</time><span class="badge">Latest</span></span>
+          <h3>BEER 0.8.0 is out 🍺</h3>
+          <p>The big one: BEER now has its own GPTK 4 runtime, downloadable right inside the app. It&#x27;s CrossOver 26&#x27;s open-source Wine with Apple&#x27;s D3DMetal 4, and the newer Wine gets games running that GPTK 3.0 couldn&#x27;t start, like…</p>
+          <span class="more">Read the announcement
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+        <a class="update-card" href="beer-updates.html#post-31">
+          <span class="card-top"><time datetime="2026-10-30T23:21:12Z">October 30, 2026</time></span>
+          <h3>BEER 0.6.0 is out 🍺</h3>
+          <p>The big one: controllers just work (Todd Howard reference). Xbox, PlayStation (DualShock 4 / DualSense) and Steam controllers can all be plugged in at once and every one of them controls the game. Play splitscreen games…</p>
+          <span class="more">Read the announcement
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+        <a class="update-card" href="beer-updates.html#post-14">
+          <span class="card-top"><time datetime="2026-10-09T19:41:56Z">October 9, 2026</time></span>
+          <h3>BEER 0.5.1 is out: play your Steam library on Apple Silicon Macs</h3>
+          <p>BEER (Bottled Executable Environment Runner) is a native macOS app that installs and runs Windows Steam games on Apple Silicon, using Apple&#x27;s Game Porting Toolkit. Each game gets its own Wine bottle, so you can tune…</p>
+          <span class="more">Read the announcement
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+<!-- /LATEST_UPDATES -->
       </div>
     </div>
   </section>

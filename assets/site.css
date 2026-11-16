@@ -288,12 +288,6 @@ section { padding: 96px 0; }
   border: 1px solid var(--line); box-shadow: 0 30px 80px -20px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.04);
 }
 .shot img { width: 100%; }
-.library-shot { margin: 0 0 40px; }
-.library-shot img {
-  width: 100%; border-radius: 12px; border: 1px solid var(--line);
-  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .45);
-  max-height: 560px; object-fit: cover; object-position: top;
-}
 figcaption { color: var(--ink-3); font-size: 14px; text-align: center; margin-top: 14px; }
 
 .feature-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; }

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BEER Updates · Release Announcements</title>
+  <meta name="description" content="Release announcements for BEER, the free, open-source Mac app for playing Windows Steam games on Apple Silicon.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BEER Updates">
+  <meta property="og:description" content="Release announcements for BEER, the open-source Mac app for Windows Steam games on Apple Silicon.">
+  <meta property="og:image" content="https://widukindtech.com/assets/beer-library.jpg">
+  <meta property="og:url" content="https://widukindtech.com/beer-updates.html">
+  <link rel="canonical" href="https://widukindtech.com/beer-updates.html">
+  <link rel="alternate" type="application/atom+xml" title="BEER Updates" href="beer-updates.xml">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/beer-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/beer-icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css?v=5">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Coby Whittekiend, home">
+      <span class="brand-mark" aria-hidden="true">CW</span>
+      <span>Coby Whittekiend</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="./#services">Services</a>
+      <a href="./#work">Work</a>
+      <a href="beer.html" class="keep" aria-current="page">BEER</a>
+      <a href="./#about">About</a>
+      <a class="btn btn-primary" href="./#contact">Hire me</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="updates-hero">
+    <div class="wrap">
+      <a class="crumb" href="beer.html">
+        <img src="assets/beer-icon.svg" alt="" width="28" height="28"> BEER
+      </a>
+      <h1>Updates</h1>
+      <p class="lede">Release announcements for BEER, posted in the project's GitHub Discussions and collected here.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://github.com/JarJarJames/BEER/releases/latest">Download the latest release</a>
+        <a class="btn btn-ghost" href="beer-updates.xml">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          Subscribe (RSS)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="updates">
+    <div class="wrap updates-grid">
+      <aside class="post-index" aria-label="All posts">
+        <h2>All posts <span>{{COUNT}}</span></h2>
+        <ol>
+{{POST_INDEX}}
+        </ol>
+        <a class="index-more" href="https://github.com/JarJarJames/BEER/discussions/categories/announcements">On GitHub</a>
+      </aside>
+      <div class="posts">
+{{POSTS}}
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Coby Whittekiend · BEER is MIT licensed and not affiliated with Valve or Apple.</span>
+    <nav aria-label="Footer">
+      <a href="./">Home</a>
+      <a href="beer.html">BEER</a>
+      <a href="https://github.com/JarJarJames/BEER">GitHub</a>
+      <a href="mailto:coby@whittekiend.com">Email</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

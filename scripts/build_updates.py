@@ -2,9 +2,9 @@
 """Build beer-updates.html and beer-updates.xml from BEER's GitHub
 Discussions "Announcements" category.
 
-Needs a GitHub token in GITHUB_TOKEN (the Actions token works; locally,
-`GITHUB_TOKEN=$(gh auth token) python3 scripts/build_updates.py`).
-Standard library only.
+Uses GitHub's public REST API, so no token is required. GITHUB_TOKEN is
+used if set, for a higher rate limit. Run locally with
+`python3 scripts/build_updates.py`. Standard library only.
 """
 import html
 import json
@@ -26,55 +26,42 @@ FEED = "beer-updates.xml"
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "templates" / "beer-updates.template.html"
 
-CATEGORY_QUERY = """
-query($owner: String!, $repo: String!, $slug: String!) {
-  repository(owner: $owner, name: $repo) {
-    discussionCategory(slug: $slug) { id }
-  }
-}
-"""
-
-POSTS_QUERY = """
-query($owner: String!, $repo: String!, $category: ID!) {
-  repository(owner: $owner, name: $repo) {
-    discussions(first: 50, categoryId: $category,
-                orderBy: {field: CREATED_AT, direction: DESC}) {
-      nodes {
-        number title url createdAt bodyHTML
-        author { login }
-        comments { totalCount }
-      }
-    }
-  }
-}
-"""
-
-
-def graphql(query, variables):
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token:
-        sys.exit("GITHUB_TOKEN is not set")
-    req = urllib.request.Request(
-        "https://api.github.com/graphql",
-        data=json.dumps({"query": query, "variables": variables}).encode(),
-        headers={"Authorization": f"bearer {token}",
-                 "Content-Type": "application/json",
-                 "User-Agent": "widukindtech-site-build"},
-    )
-    with urllib.request.urlopen(req, timeout=30) as r:
-        data = json.load(r)
-    if data.get("errors"):
-        sys.exit(f"GraphQL errors: {data['errors']}")
-    return data["data"]
+API = f"https://api.github.com/repos/{OWNER}/{REPO}/discussions"
 
 
 def fetch():
-    repo = {"owner": OWNER, "repo": REPO}
-    cat = graphql(CATEGORY_QUERY, {**repo, "slug": CATEGORY_SLUG})["repository"]["discussionCategory"]
-    if cat is None:
-        sys.exit(f"No discussion category with slug '{CATEGORY_SLUG}'")
-    nodes = graphql(POSTS_QUERY, {**repo, "category": cat["id"]})["repository"]["discussions"]["nodes"]
-    return [d for d in nodes if d["author"] and d["author"]["login"] == AUTHOR]
+    """Read discussions from GitHub's public REST API. A token is optional
+    (it only raises the rate limit); the Actions token can't read another
+    repo's discussions over GraphQL, but this endpoint works with it."""
+    headers = {"Accept": "application/vnd.github.full+json",
+               "X-GitHub-Api-Version": "2022-11-28",
+               "User-Agent": "widukindtech-site-build"}
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    posts, page = [], 1
+    while True:
+        req = urllib.request.Request(f"{API}?per_page=100&page={page}", headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            batch = json.load(r)
+        for d in batch:
+            if d["category"]["slug"] != CATEGORY_SLUG:
+                continue
+            if not d.get("user") or d["user"]["login"] != AUTHOR:
+                continue
+            posts.append({
+                "number": d["number"],
+                "title": d["title"],
+                "url": d["html_url"],
+                "createdAt": d["created_at"],
+                "bodyHTML": d.get("body_html") or "",
+                "comments": {"totalCount": d.get("comments", 0)},
+            })
+        if len(batch) < 100:
+            break
+        page += 1
+    posts.sort(key=lambda p: p["createdAt"], reverse=True)
+    return posts
 
 
 PARA = re.compile(r"<p([^>]*)>(.*?)</p>", re.S)
